@@ -6,7 +6,7 @@ var map = {
   element: document.getElementById("map"),
   block_cubes: [],
 
-  shadows: false,
+  shadows: true,
 
   boot: function(){
     this.scene = new THREE.Scene()
@@ -36,21 +36,22 @@ var map = {
     
     this.material = new THREE.MeshPhongMaterial({ color: 0xFFFFFF, specular: 0x444444, map: wallTexture, shininess: 30, shading: THREE.SmoothShading, transparent: true })
     
-    this.top_light = new THREE.DirectionalLight(0x404040, 1, 700)
+    this.top_light = new THREE.DirectionalLight(0x404040, 1)
     this.top_light.castShadow = true;
+    this.top_light.shadowCameraVisible = true;
     this.top_light.shadowDarkness = 1;
     
     this.top_light.shadowMapWidth = 512;
     this.top_light.shadowMapHeight = 512;
 
-    var d = 100;
+    var d = 10;
 
     this.top_light.shadowCameraLeft = -d;
     this.top_light.shadowCameraRight = d;
     this.top_light.shadowCameraTop = d;
     this.top_light.shadowCameraBottom = -d;
 
-    this.top_light.shadowCameraFar = 30;
+    this.top_light.shadowCameraFar = 25;
     
     this.top_light.position.x = 0
     this.top_light.position.y = 20
@@ -70,7 +71,7 @@ var map = {
     
     this.bot = new THREE.Mesh(new THREE.SphereGeometry(0.5, 32, 32), new THREE.MeshPhongMaterial({ color: 0x0089FF, specular: 0x777777, shininess: 10, shading: THREE.SmoothShading }))
     this.bot.castShadow = true
-    this.bot_light = new THREE.PointLight(0x0089FF, 0.3, 2)
+    // this.bot_light = new THREE.PointLight(0x0089FF, 0.3, 2)
     // this.scene.add(this.bot_light)
     this.scene.add(this.bot)
     this.render()
@@ -109,10 +110,9 @@ var map = {
       this.bot.position.z = grid_position.z
     }
     
-    // this.bot_light.position.x = this.bot.position.x
-    // this.bot_light.position.z = this.bot.position.z
-    
-    // this.bot_light.position.y = this.bot.position.y
+    this.top_light.position.x = this.bot.position.x
+    this.top_light.position.z = this.bot.position.z
+    this.top_light.position.y = this.bot.position.y + 10
     
     this.camera.position.x = this.bot.position.x
     this.camera.position.z = this.bot.position.z + 5
