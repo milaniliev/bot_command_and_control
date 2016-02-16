@@ -1,0 +1,6 @@
+{
+  "name": "bot_cnc_web",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}

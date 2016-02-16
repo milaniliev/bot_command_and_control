@@ -1,6 +1,0 @@
-{
-  "name": "dns_keeper",
-  "dependencies": {
-    "express": "^4.13.4"
-  }
-}

@@ -1,0 +1,7 @@
+{
+  "name": "bot_cnc_api",
+  "dependencies": {
+    "express": "^4.13.4",
+    "sugar": "^1.4.1"
+  }
+}
