@@ -19,7 +19,8 @@ The command MUST include "bot_position" and "obstacles".
     {"x": 1, "y": 1, "z": 1, "p": 0.5},
     {"x": 2, "y": 0, "z": 2}    
   ],
-  "bot_position": {"x": 0.124123, "y": 1.24312423, "z": 0.2421423}
+  "bot_position": {"x": 0.124123, "y": 1.24312423, "z": 0.2421423},
+  "bot_heading": {"x": 1, "y": 1, "z": 1, "w": 0}
 }
 ```
 
@@ -30,14 +31,9 @@ The CnC server should keep existing map data and update it as indicated.
 ```json
 {
   "command": "update_map",
-  "add_obstacles": [
-    {"x": 1, "y": 1, "z": 1}
-  ],
-  "remove_obstacles": [
-    {"x": 1, "y": 1, "z": 2}
-  ],
-  "update_obstacles": [
+  "obstacles": [
     {"x": 1, "y": 1, "z": 1, "p": 0.2}
-  ]
-  "bot_position": {"x": 0.124123, "y": 1.24312423, "z": 0.2421423}
+  ],
+  "bot_position": {"x": 0.124123, "y": 1.24312423, "z": 0.2421423},
+  "bot_heading": {"x": 1, "y": 1, "z": 1, "w": 0}
 }

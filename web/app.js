@@ -14,8 +14,8 @@ var map = {
     this.renderer = new THREE.WebGLRenderer({canvas: this.element, antialias: true})
 	  
     if(this.shadows){
-      this.renderer.shadowMapEnabled = true;
-      this.renderer.shadowMapType = THREE.PCFSoftShadowMap;
+      this.renderer.shadowMap.enabled = true;
+      this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     }
      
     this.renderer.setClearColor(0xeeeeee, 1)
@@ -38,20 +38,18 @@ var map = {
     
     this.top_light = new THREE.DirectionalLight(0x404040, 1)
     this.top_light.castShadow = true;
-    this.top_light.shadowCameraVisible = true;
-    this.top_light.shadowDarkness = 1;
     
-    this.top_light.shadowMapWidth = 512;
-    this.top_light.shadowMapHeight = 512;
+    this.top_light.shadow.mapSize.width = 512;
+    this.top_light.shadow.mapSize.height = 512;
 
     var d = 10;
 
-    this.top_light.shadowCameraLeft = -d;
-    this.top_light.shadowCameraRight = d;
-    this.top_light.shadowCameraTop = d;
-    this.top_light.shadowCameraBottom = -d;
+    this.top_light.shadow.camera.left = -d;
+    this.top_light.shadow.camera.right = d;
+    this.top_light.shadow.camera.top = d;
+    this.top_light.shadow.camera.bottom = -d;
 
-    this.top_light.shadowCameraFar = 25;
+    this.top_light.shadow.camera.far = 25;
     
     this.top_light.position.x = 0
     this.top_light.position.y = 20
@@ -60,7 +58,6 @@ var map = {
     
     var light = new THREE.AmbientLight( 0xA0A0A0 ); // soft white light 
     this.scene.add( light );
-
 
     this.ground = new THREE.Mesh(new THREE.PlaneGeometry(400,400), new THREE.MeshPhongMaterial({map: groundTexture, color: 0xFFFFFF}))
     this.ground.receiveShadow = true
@@ -82,17 +79,23 @@ var map = {
     this.renderer.render(this.scene, this.camera)
     
     // simulations
- 	  this.moveBotTo({z: this.bot.position.z - 0.02})
+ 	  // this.moveBotTo({z: this.bot.position.z - 0.02})
 
   },
   
-  placeBlockAt(grid_coordinates){
+  setBlock(grid_coordinates){
     this.block_cubes[grid_coordinates.x] = this.block_cubes[grid_coordinates.x] || []
     var cube = this.block_cubes[grid_coordinates.x][grid_coordinates.z] || new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), window.map.material)
     cube.receiveShadow = true
     cube.position.x = grid_coordinates.x
     cube.position.z = grid_coordinates.z
     this.block_cubes[grid_coordinates.x][grid_coordinates.z] = cube 
+    
+    if(grid_coordinates.opacity){
+      cube.material = cube.material.clone()
+      cube.material.opacity = grid_coordinates.opacity
+    }  
+      
     
     this.scene.add(this.block_cubes[grid_coordinates.x][grid_coordinates.z])
   },
@@ -121,46 +124,52 @@ var map = {
   
   load(map_data){
     map_data.forEach(function(block_coordinates){
-      this.placeBlockAt(block_coordinates)
+      this.setBlock(block_coordinates)
     }.bind(this))
   }
 }
 
 map.boot()
 
-map.load([
-  {x: 1, z: -1},
-  {x: 1, z: 0},
-  {x: 1, z: 1},
-  {x: 1, z: 2},
+// map.load([
+//   {x: 1, z: -1},
+//   {x: 1, z: 0},
+//   {x: 1, z: 1},
+//   {x: 1, z: 2},
 
   
-  {x: -1, z: -10},
-  {x: -2, z: -10},
-  {x: -3, z: -10},
-  {x: -4, z: -10},
+//   {x: -1, z: -10},
+//   {x: -2, z: -10},
+//   {x: -3, z: -10},
+//   {x: -4, z: -10},
           
   
-  {x: -1, z: -5},
-  {x: -2, z: -5},
-  {x: -3, z: -5},
-  {x: -4, z: -5},
-  {x: -4, z: -4},
-  {x: -4, z: -3},
-  {x: -4, z: -2},
-  {x: -4, z: -1},
-  {x: -4, z: 0},
+//   {x: -1, z: -5},
+//   {x: -2, z: -5},
+//   {x: -3, z: -5},
+//   {x: -4, z: -5},
+//   {x: -4, z: -4},
+//   {x: -4, z: -3},
+//   {x: -4, z: -2},
+//   {x: -4, z: -1},
+//   {x: -4, z: 0},
   
-  {x: 2, z: -3},
-  {x: 1, z: -4},
-  {x: 2, z: -3},
-  {x: 1, z: -5},
-  {x: 3, z: -2},
-  {x: 1, z: -3}
-])
+//   {x: 2, z: -3},
+//   {x: 1, z: -4},
+//   {x: 2, z: -3},
+//   {x: 1, z: -5},
+//   {x: 3, z: -2},
+//   {x: 1, z: -3}
+// ])
 
 // indicate uncertainty
-map.block_cubes[1][0].material = map.block_cubes[1][0].material.clone()
-map.block_cubes[1][0].material.opacity = 0.6
+
 
 window.map = map
+
+var consoleConnection = new WebSocket("ws://localhost:8989", "bot-protocol")
+consoleConnection.onmessage = function(event){
+  var command_data = JSON.parse(event.data)
+  
+  console.log(command_data)  
+}

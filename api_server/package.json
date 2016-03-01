@@ -2,6 +2,8 @@
   "name": "bot_cnc_api",
   "dependencies": {
     "express": "^4.13.4",
-    "sugar": "^1.4.1"
+    "sugar": "^1.4.1",
+    "three.js": "^0.73.2",
+    "websocket": "^1.0.22"
   }
 }
