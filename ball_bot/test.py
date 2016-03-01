@@ -12,4 +12,5 @@ nav.boot()
 while True:
   print 'POS: {0}'.format(nav.get_current_position()['position'])
   print 'VEL: {0}'.format(nav.get_current_position()['velocity'])
-  time.sleep(0.5)
+  print 'ACC: {0}'.format(nav.get_current_position()['acceleration'])
+  time.sleep(2)

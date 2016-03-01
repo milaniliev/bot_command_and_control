@@ -109,6 +109,13 @@ class InertialNavigation:
         'z': z,
       }
       
+      x,y,z = self.sensors.read_linear_acceleration() # in m/sec^2
+      data['acceleration'] = {
+        'x': x,
+        'y': y,
+        'z': z,
+      }
+      
       data['temp'] = self.sensors.read_temp() # in degrees C
         
       data['position'] = self.position
