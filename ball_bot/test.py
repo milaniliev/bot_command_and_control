@@ -10,5 +10,6 @@ nav = InertialNavigation()
 nav.boot()
 
 while True:
-  print '{0}'.format(nav.get_current_position()['position'])
+  print 'POS: {0}'.format(nav.get_current_position()['position'])
+  print 'VEL: {0}'.format(nav.get_current_position()['velocity'])
   time.sleep(0.5)
