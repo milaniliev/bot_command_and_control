@@ -29,7 +29,7 @@ class IMU:
       'z_sign': BNO055.AXIS_REMAP_NEGATIVE 
     })
     
-    if os.path.exists(self.calibration_file_path)
+    if os.path.exists(self.calibration_file_path):
       self.load_calibration()
     else
       print "'{0}' not found, beginning calibration".format(self.calibration_file_path)
