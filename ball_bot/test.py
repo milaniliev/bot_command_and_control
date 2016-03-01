@@ -1,5 +1,6 @@
 from imu    import IMU 
 from motors import Motors
+import time
 
 # motor = Motors()
 # motor.boot()
@@ -8,4 +9,6 @@ from motors import Motors
 imu = IMU()
 imu.boot()
 
-print '{0}'.format(imu.read())
+while True:
+  print '{0}'.format(imu.read())
+  time.sleep(0.5)
