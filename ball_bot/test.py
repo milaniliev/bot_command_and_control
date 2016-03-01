@@ -1,5 +1,5 @@
 import imu
-import motors
+from motors import Motors
 
 motor = Motors()
 motor.boot()
