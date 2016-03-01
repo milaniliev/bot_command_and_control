@@ -133,9 +133,9 @@ class InertialNavigation:
         self.velocity['z'] += acceleration['z'] * self.update_interval
         
         # update current position, in m from origin
-        self.position['x'] += velocity['x'] * self.update_interval
-        self.position['y'] += velocity['y'] * self.update_interval
-        self.position['z'] += velocity['z'] * self.update_interval
+        self.position['x'] += self.velocity['x'] * self.update_interval
+        self.position['y'] += self.velocity['y'] * self.update_interval
+        self.position['z'] += self.velocity['z'] * self.update_interval
         
         self.data_available.notifyAll()
         
