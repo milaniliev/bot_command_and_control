@@ -67,7 +67,7 @@ class IMU:
   def store_calibration(self):
     print "Storing calibration in {0}".format(self.calibration_file_path)
     with open(self.calibration_file_path, 'w') as calibration_file:
-      json.dump(data = imu.get_calibration(), self.calibration_file_path)
+      json.dump(imu.get_calibration(), self.calibration_file_path)
 
   def load_calibration(self):
     print "Loading calibration from {0}".format(self.calibration_file_path)
