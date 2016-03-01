@@ -1,4 +1,4 @@
-from imu    import IMU 
+from inertial_navigation import InertialNavigation 
 from motors import Motors
 import time
 
@@ -6,9 +6,9 @@ import time
 # motor.boot()
 # motor.move('backward', 255)
 
-imu = IMU()
-imu.boot()
+nav = InertialNavigation()
+nav.boot()
 
 while True:
-  print '{0}'.format(imu.read())
+  print '{0}'.format(nav.get_current_position()['position'])
   time.sleep(0.5)
