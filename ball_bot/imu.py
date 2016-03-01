@@ -8,7 +8,7 @@ class IMU:
   def __init__(self):
     self.imu = BNO055.BNO055(serial_port='/dev/ttyAMA0', rst=18)
 
-  def boot():
+  def boot(self):
     booted = self.imu.begin() 
     status, self_test, error = bno.get_system_status()
       
@@ -35,7 +35,7 @@ class IMU:
       print "'{0}' not found, beginning calibration".format(self.calibration_file_path)
       self.calibrate()
 
-  def calibrate():
+  def calibrate(self):
     system_calibration, gyro_calibration, accelerometer_calibration, magnetometer_calibration = self.imu.get_calibration_status()
 
     while gyro_calibration != 3:
@@ -64,22 +64,22 @@ class IMU:
     
     store_calibration()
 
-  def store_calibration():
+  def store_calibration(self):
     print "Storing calibration in {0}".format(self.calibration_file_path)
-    with open(CALIBRATION_FILE, 'w') as calibration_file:
+    with open(self.calibration_file_path, 'w') as calibration_file:
       json.dump(data = imu.get_calibration(), self.calibration_file_path)
 
-  def load_calibration():
+  def load_calibration(self):
     print "Loading calibration from {0}".format(self.calibration_file_path)
-    with open(CALIBRATION_FILE, 'r') as calibration_file:
+    with open(self.calibration_file_path, 'r') as calibration_file:
       imu.set_calibration(json.load(self.calibration_file_path))
 
-  def read():
-    heading, roll, pitch = imu.read_euler() 
-    x,y,z,w = imu.read_quaterion()
+  def read(self):
+    heading, roll, pitch = self.imu.read_euler() 
+    x,y,z,w = self.imu.read_quaterion()
 
-    temp_c = imu.read_temp() # in degrees C 
-    x,y,z = imu.read_gyroscope() # in deg/sec
+    temp_c = self.imu.read_temp() # in degrees C 
+    x,y,z = self.imu.read_gyroscope() # in deg/sec
 
-    x,y,z = bno.read_linear_acceleration() # in m/sec^2
-    x,y,z = imu.read_gravity() # in m/sec^2
+    x,y,z = self.imu.read_linear_acceleration() # in m/sec^2
+    x,y,z = self.imu.read_gravity() # in m/sec^2
