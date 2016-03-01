@@ -13,7 +13,7 @@ class Motors(object):
     self.left_motor = self.motor_controller.getMotor(self.left_motor_id)
     self.right_motor = self.motor_controller.getMotor(self.right_motor_id)
     
-  def boot():
+  def boot(self):
     # stop both motors
     self.all_stop()
   
