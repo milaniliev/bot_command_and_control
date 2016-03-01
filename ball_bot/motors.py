@@ -24,8 +24,8 @@ class Motors(object):
     self.righ_motor.run(Adafruit_MotorHAT.RELEASE)  
 
   def move(self, direction, speed, for_seconds=None):
-    self.left_motor.setSpeed  max(0, min(speed + self.left_motor_trim, 255))
-    self.right_motor.setSpeed max(0, min(speed + self.right_motor_trim, 255)) 
+    self.left_motor.setSpeed( max(0, min(speed + self.left_motor_trim,  255)))
+    self.right_motor.setSpeed(max(0, min(speed + self.right_motor_trim, 255))) 
 
     motor_directions = {
       ' forward': {'left': Adafruit_MotorHAT.FORWARD,  'right': Adafruit_MotorHAT.FORWARD },  
