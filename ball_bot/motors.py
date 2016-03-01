@@ -9,7 +9,7 @@ class Motors(object):
   right_motor_trim = 0
   
   def __init__(self, motor_controller_i2c_address = 0x60):
-    self.motor_controller = AdafruitMotorHAT(motor_controller_i2c_address)
+    self.motor_controller = Adafruit_MotorHAT(motor_controller_i2c_address)
     self.left_motor = self.motor_controller.getMotor(self.left_motor_id)
     self.right_motor = self.motor_controller.getMotor(self.right_motor_id)
     
