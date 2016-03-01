@@ -10,7 +10,7 @@ class IMU:
 
   def boot(self):
     booted = self.imu.begin() 
-    status, self_test, error = bno.get_system_status()
+    status, self_test, error = self.imu.get_system_status()
       
     if not(booted) or status == 0x01 or self_test != 0x0F:
       print('IMU error: {0}'.format(error)) 
