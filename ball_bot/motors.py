@@ -21,7 +21,7 @@ class Motors(object):
   
   def all_stop(self):
     self.left_motor.run(Adafruit_MotorHAT.RELEASE)
-    self.righ_motor.run(Adafruit_MotorHAT.RELEASE)  
+    self.right_motor.run(Adafruit_MotorHAT.RELEASE)  
 
   def move(self, direction, speed, for_seconds=None):
     self.left_motor.setSpeed( max(0, min(speed + self.left_motor_trim,  255)))
