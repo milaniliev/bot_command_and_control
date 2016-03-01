@@ -75,11 +75,40 @@ class IMU:
       imu.set_calibration(json.load(self.calibration_file_path))
 
   def read(self):
-    heading, roll, pitch = self.imu.read_euler() 
+    data = {}
+    
+    # heading, roll, pitch = self.imu.read_euler()
+     
     x,y,z,w = self.imu.read_quaterion()
-
-    temp_c = self.imu.read_temp() # in degrees C 
+    data['heading'] = {
+      'x': x,
+      'y': y,
+      'z': z,
+      'w': w,
+    }
+    
     x,y,z = self.imu.read_gyroscope() # in deg/sec
+    data['rotation'] = {
+      'x': x,
+      'y': y,
+      'z': z,
+    }
 
+    data['temp'] = self.imu.read_temp() # in degrees C 
+    
     x,y,z = self.imu.read_linear_acceleration() # in m/sec^2
+    data['linear_acceleration'] = {
+      'x': x,
+      'y': y,
+      'z': z,
+    }
+    
     x,y,z = self.imu.read_gravity() # in m/sec^2
+    
+    data['gravity'] = {
+      'x': x,
+      'y': y,
+      'z': z,
+    }
+    
+    return data
