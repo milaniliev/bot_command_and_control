@@ -80,7 +80,7 @@ class IMU:
     
     # heading, roll, pitch = self.imu.read_euler()
      
-    x,y,z,w = self.imu.read_quaterion()
+    x,y,z,w = self.imu.read_quaternion()
     data['heading'] = {
       'x': x,
       'y': y,
