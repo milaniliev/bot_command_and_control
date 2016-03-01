@@ -12,7 +12,7 @@ class IMU:
     booted = self.imu.begin() 
     status, self_test, error = bno.get_system_status()
       
-    if !booted || status == 0x01 || self_test != 0x0F:
+    if not(booted) || status == 0x01 || self_test != 0x0F:
       print('IMU error: {0}'.format(error)) 
     
     # BNO sensor axes remap values.  These are the parameters to the BNO.set_axis_remap
