@@ -134,10 +134,11 @@ class InertialNavigation:
         acceleration = {}
         acceleration['x'], acceleration['y'], acceleration['z'] = self.sensors.read_linear_acceleration() # in m/sec^2
         
+        
         # update current velocity, in m/sec
-        self.velocity['x'] += acceleration['x'] * self.update_interval
-        self.velocity['y'] += acceleration['y'] * self.update_interval
-        self.velocity['z'] += acceleration['z'] * self.update_interval
+        if abs(acceleration['x']) >= 0.2: self.velocity['x'] += acceleration['x'] * self.update_interval
+        if abs(acceleration['y']) >= 0.2: self.velocity['y'] += acceleration['y'] * self.update_interval
+        if abs(acceleration['z']) >= 0.2: self.velocity['z'] += acceleration['z'] * self.update_interval
         
         # update current position, in m from origin
         self.position['x'] += self.velocity['x'] * self.update_interval
