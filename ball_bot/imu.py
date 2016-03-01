@@ -31,7 +31,7 @@ class IMU:
     
     if os.path.exists(self.calibration_file_path):
       self.load_calibration()
-    else
+    else:
       print "'{0}' not found, beginning calibration".format(self.calibration_file_path)
       self.calibrate()
 
