@@ -13,4 +13,5 @@ while True:
   print 'POS: {0}'.format(nav.get_current_position()['position'])
   print 'VEL: {0}'.format(nav.get_current_position()['velocity'])
   print 'ACC: {0}'.format(nav.get_current_position()['acceleration'])
+  print 'HED: {0}'.format(nav.get_current_position()['heading'])
   time.sleep(2)
