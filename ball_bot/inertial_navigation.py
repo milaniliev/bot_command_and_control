@@ -85,31 +85,32 @@ class InertialNavigation:
   def get_current_position(self):
     
     data = {}
-    x,y,z,w = self.sensors.read_quaternion()
-    data['heading'] = {
-      'x': x,
-      'y': y,
-      'z': z,
-      'w': w,
-    }
-    
-    x,y,z = self.sensors.read_gravity() # in m/sec^2
-    data['gravity'] = {
-      'x': x,
-      'y': y,
-      'z': z,
-    }
-    
-    x,y,z = self.sensors.read_gyroscope() # in deg/sec
-    data['rotation'] = {
-      'x': x,
-      'y': y,
-      'z': z,
-    }
-    
-    data['temp'] = self.sensors.read_temp() # in degrees C
-       
+
     with self.data_available:
+      x,y,z,w = self.sensors.read_quaternion()
+      data['heading'] = {
+        'x': x,
+        'y': y,
+        'z': z,
+        'w': w,
+      }
+      
+      x,y,z = self.sensors.read_gravity() # in m/sec^2
+      data['gravity'] = {
+        'x': x,
+        'y': y,
+        'z': z,
+      }
+      
+      x,y,z = self.sensors.read_gyroscope() # in deg/sec
+      data['rotation'] = {
+        'x': x,
+        'y': y,
+        'z': z,
+      }
+      
+      data['temp'] = self.sensors.read_temp() # in degrees C
+        
       data['position'] = self.position
       data['velocity'] = self.velocity
     
