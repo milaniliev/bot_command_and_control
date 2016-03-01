@@ -2,6 +2,7 @@ from Adafruit_BNO055 import BNO055
 import time
 import threading
 import os
+import json
 
 class IMU:
   calibration_file_path = 'calibration.json'
