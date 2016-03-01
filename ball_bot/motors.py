@@ -10,8 +10,8 @@ class Motors(object):
   
   def __init__(self, motor_controller_i2c_address = 0x60):
     self.motor_controller = AdafruitMotorHAT(motor_controller_i2c_address)
-    self.left_motor = self.motor_controller.getMotor(self.class.left_motor_id)
-    self.right_motor = self.motor_controller.getMotor(self.class.right_motor_id)
+    self.left_motor = self.motor_controller.getMotor(self.left_motor_id)
+    self.right_motor = self.motor_controller.getMotor(self.right_motor_id)
     
   def boot():
     # stop both motors
