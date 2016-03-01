@@ -6,7 +6,7 @@ import json
 
 class InertialNavigation:
   calibration_file_path = 'calibration.json'
-  update_interval = 0.1 # seconds
+  update_interval = 0.01 # seconds
   
   def __init__(self):
     self.sensors = BNO055.BNO055(serial_port='/dev/ttyAMA0', rst=18)
