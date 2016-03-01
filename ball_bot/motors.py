@@ -35,7 +35,7 @@ class Motors(object):
     }[direction]
 
     self.left_motor.run(motor_directions['left'])
-    self.righ_motor.run(motor_directions['right'])
+    self.right_motor.run(motor_directions['right'])
     
     if for_seconds is not None:
       time.sleep(for_seconds)
