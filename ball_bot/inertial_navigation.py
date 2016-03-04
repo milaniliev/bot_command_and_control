@@ -6,7 +6,7 @@ import json
 
 class InertialNavigation:
   calibration_file_path = 'calibration.json'
-  update_interval = 0.001 # seconds
+  update_interval = 0.1 # seconds
   
   def __init__(self):
     self.sensors = BNO055.BNO055(serial_port='/dev/ttyAMA0', rst=18)
@@ -133,7 +133,6 @@ class InertialNavigation:
       with self.data_available:
         acceleration = {}
         acceleration['x'], acceleration['y'], acceleration['z'] = self.sensors.read_linear_acceleration() # in m/sec^2
-        
         
         # update current velocity, in m/sec
         self.velocity['x'] += acceleration['x'] * self.update_interval
