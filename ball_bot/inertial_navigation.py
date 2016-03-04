@@ -6,7 +6,7 @@ import json
 
 class InertialNavigation:
   calibration_file_path = 'calibration.json'
-  update_interval = 0.1 # seconds
+  update_interval = 0.0001 # seconds
   
   def __init__(self):
     self.sensors = BNO055.BNO055(serial_port='/dev/ttyAMA0', rst=18)
@@ -58,7 +58,7 @@ class InertialNavigation:
       time.sleep(0.5)
       system_calibration, gyro_calibration, accelerometer_calibration, magnetometer_calibration = self.sensors.get_calibration_status()
 
-    while accelerometer_calibration !=3:
+    while accelerometer_calibration != 3:
       print "Calibrating Accelerometer...{0}%\n".format(accelerometer_calibration*25)
       print "Please move the device in a cube in the air.\n" 
       time.sleep(0.5)
@@ -147,4 +147,3 @@ class InertialNavigation:
         self.data_available.notifyAll()
         
       time.sleep(self.update_interval)
-      
