@@ -25,6 +25,7 @@ module.exports = {
   
   send: function(message){
     if(this.connection){
+      console.log(`CONSOLE: Sending `, message)
       this.connection.sendUTF(JSON.stringify(message))
     } else {
       console.log(`CONSOLE: Discarding ${message}, no display connected`)

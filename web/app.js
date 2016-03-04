@@ -68,8 +68,6 @@ var map = {
     
     this.bot = new THREE.Mesh(new THREE.SphereGeometry(0.5, 32, 32), new THREE.MeshPhongMaterial({ color: 0x0089FF, specular: 0x777777, shininess: 10, shading: THREE.SmoothShading }))
     this.bot.castShadow = true
-    // this.bot_light = new THREE.PointLight(0x0089FF, 0.3, 2)
-    // this.scene.add(this.bot_light)
     this.scene.add(this.bot)
     this.render()
   },
@@ -77,10 +75,6 @@ var map = {
   render: function render() { 
     requestAnimationFrame(this.render.bind(this))
     this.renderer.render(this.scene, this.camera)
-    
-    // simulations
- 	  // this.moveBotTo({z: this.bot.position.z - 0.02})
-
   },
   
   setBlock(grid_coordinates){
@@ -170,6 +164,14 @@ window.map = map
 var consoleConnection = new WebSocket("ws://localhost:8989", "bot-protocol")
 consoleConnection.onmessage = function(event){
   var command_data = JSON.parse(event.data)
-  
+  if(command_data.obstacles){
+    command_data.obstacles.forEach(function(block){
+      if(block.p == 0){
+        map.removeBlockAt(block)
+      } else {
+        map.setBlock(block)
+      }
+    })
+  }
   console.log(command_data)  
 }

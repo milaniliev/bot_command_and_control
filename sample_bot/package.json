@@ -1,0 +1,6 @@
+{
+  "name": "sample_bot",
+  "dependencies": {
+    "three": "^0.74.0"
+  }
+}

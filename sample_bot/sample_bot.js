@@ -1,5 +1,5 @@
 'use strict'
-var THREE = require('three.js')
+var THREE = require('three')
 
 var Net = require('net')
 
@@ -38,7 +38,7 @@ class SampleBot {
   
   turn_left(){
     console.log("GO LEFT")
-    this.heading = this.heading.applyEuler(new THREE.Euler(0, 0, 1))
+    this.heading = this.heading.applyEuler(new THREE.Euler(1, 0, 0))
     this.push_location()
   }
   
